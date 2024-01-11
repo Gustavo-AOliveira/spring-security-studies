@@ -2,6 +2,7 @@ package com.example.Name.Spring.Security.studies.controller;
 
 import com.example.Name.Spring.Security.studies.entities.product.ProductRequestDTO;
 import com.example.Name.Spring.Security.studies.entities.product.ProductResponseDTO;
+import com.example.Name.Spring.Security.studies.exception.EmptyListException;
 import com.example.Name.Spring.Security.studies.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<List<ProductResponseDTO>> getAllProducts(){
         List<ProductResponseDTO> listProducts = productService.getAll();
+            if(listProducts.isEmpty()){
+                throw new EmptyListException();
+            }
             return ResponseEntity.ok().body(listProducts);
     }
 }
