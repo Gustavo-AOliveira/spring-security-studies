@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class Exception {
 
     @ExceptionHandler(EmptyListException.class)
+
     public ResponseEntity<CustomErrorResponse> emptyListException(EmptyListException exception){
         CustomErrorResponse customErrorResponse = new CustomErrorResponse(HttpStatus.OK, exception.getMessage());
         return ResponseEntity.status(HttpStatus.OK).body(customErrorResponse);
@@ -28,6 +29,18 @@ public class Exception {
         CustomErrorResponse customErrorResponse = new CustomErrorResponse(HttpStatus.BAD_REQUEST,"Fill in the fields correctely");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(customErrorResponse);
     }
+    @ExceptionHandler(LoginAlreadyExists.class)
+    public ResponseEntity<CustomErrorResponse> loginAlreadyExistsException(LoginAlreadyExists exception){
+        CustomErrorResponse customErrorResponse = new CustomErrorResponse(HttpStatus.BAD_REQUEST,exception.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(customErrorResponse);
+    }
+    @ExceptionHandler(loginIncorrectException.class)
+    public ResponseEntity<CustomErrorResponse> loginIncorrectException(loginIncorrectException exception){
+        CustomErrorResponse customErrorResponse = new CustomErrorResponse(HttpStatus.BAD_REQUEST, exception.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(customErrorResponse);
+
+    }
+
 }
 
 
